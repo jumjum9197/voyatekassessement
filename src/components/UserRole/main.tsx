@@ -11,12 +11,13 @@ import { useState } from "react";
 import SearchInput from "../../custom/searchInput/searchInput";
 import { Form, Formik } from "formik";
 import EditContent from "./edit";
+import AddContent from "./add";
 
 const Main = () => {
   //   const [showSearch, setShowSearch] = useState(false);
   //   const [searchTerm, setSearchTerm] = useState("");
   //   const [showAllFilter, setShowAllFilter] = useState(false);
-  //   const [showAddModal, setShowAddModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
 
   //   const handleSearch = (e: any) => {
@@ -84,36 +85,12 @@ const Main = () => {
       />
 
       <section className="card">
-        {/* <div className='inside'>
-          <p>Showing 1-11 of 88</p>
-          <div>
-            {!showSearch && (
-              <span>
-                <Search
-                  onClick={() => setShowSearch((showSearch) => !showSearch)}
-                />
-              </span>
-            )}
-            {showSearch && (
-              <SearchInput value={searchTerm} onChange={handleSearch} />
-            )}
-
-            {!showAllFilter && (
-              <Search
-                onClick={() =>
-                  setShowAllFilter((showAllFilter) => !showAllFilter)
-                }
-              />
-            )}
-          </div>
-        </div> */}
-
         <section className="w-full p-8 flex justify-between items-center bg-white">
           
           <>
             <SearchInput />
             <Filter />
-            <Button iconBefore={<Add />} text="New User" className="  p-2" />
+            <Button onClick={()=>{setShowAddModal(true)}} iconBefore={<Add />} text="New User" className="  p-2" />
           </>
 
      
@@ -133,7 +110,7 @@ const Main = () => {
         title={
           <div>
             <Pics />
-            <p>New User</p>
+            <p>Edit User</p>
           </div>
         }
         footer={() => (
@@ -145,6 +122,26 @@ const Main = () => {
         )}
       >
         <EditContent />
+      </Modal>
+      <Modal
+        open={showAddModal}
+        onCancel={() => setShowAddModal(false)}
+        centered
+        title={
+          <div>
+            <Pics />
+            <p>Add User</p>
+          </div>
+        }
+        footer={() => (
+          <Button
+            onClick={() => setShowAddModal(false)}
+            variant="text"
+            text="Add User"
+          />
+        )}
+      >
+        <AddContent />
       </Modal>
     </main>
   );
