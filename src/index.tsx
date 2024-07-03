@@ -3,13 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { QueryClientProvider,QueryClient } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
+import { App as AntdApp } from "antd";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+    mutations: {
+      retry: 0,
+    },
+  },
+});
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        {/* <Theme> */}
+          <AntdApp notification={{ placement: "topRight" }}>
+            <App />
+          </AntdApp>
+        {/* </Theme> */}
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

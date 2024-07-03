@@ -1,60 +1,71 @@
 import { NavLink } from "react-router-dom";
-import { ReactComponent as Overview } from "../../assets/overview.svg";
-import { ReactComponent as Subscribe } from "../../assets/subscribe.svg";
+import { ReactComponent as Home } from "../../assets/magnifier.svg";
+import { ReactComponent as Security } from "../../assets/magnifier.svg";
+import { ReactComponent as Notifications } from "../../assets/magnifier.svg";
+import { ReactComponent as Pricing } from "../../assets/magnifier.svg";
+import { ReactComponent as Sales } from "../../assets/magnifier.svg";
+import { ReactComponent as UsersRoles } from "../../assets/magnifier.svg";
+import { ReactComponent as Backups } from "../../assets/magnifier.svg";
 import { ReactComponent as BackToDashBoard } from "../../assets/backToDashBoard.svg";
-import { ReactComponent as Search } from "../../assets/search.svg";
-import { ReactComponent as Book } from "../../assets/book.svg";
-import { ReactComponent as Chat } from "../../assets/chat.svg";
-import { ReactComponent as Key } from "../../assets/key.svg";
-import styles from "./styles.module.scss";
+import '../../../src/styles/tailwind.css'; 
+
 // import { useAtomValue } from "jotai";
+
+
 
 const Sidebar = () => {
   return (
     <>
-      <nav className={styles.sidebarNav}>
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/overview"}>
+      <nav className='sidebarNav flex flex-col justify-center w-full p-4 sm:p-0 gap-4'>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/overview"}>
           <span>
-            <Overview />
+            <Home />
           </span>
-          Overview
+          Home
         </NavLink>
 
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/subscribe"}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/subscribe"}>
           <span>
-            <Subscribe />
+            <Security />
           </span>
-          Subscribe to other Lecturers
+          Security
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/materials"}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/materials"}>
           <span>
             {" "}
-            <Search />
+            <Notifications />
           </span>
-          Search Materials
+          Notifications
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/my-paid-materials"}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/my-paid-materials"}>
           <span>
             {" "}
-            <Book />
+            <Pricing />
           </span>
-          My Paid Materials
+          Pricing
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/messages"}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/messages"}>
           <span>
-            <Chat />
+            <Sales />
           </span>
-          Message Lecturers
+          Sales
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={"/change-password"}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/change-password"}>
           <span>
             {" "}
-            <Key />
+            <UsersRoles />
           </span>
-          Change Password
+          Users & Roles
+        </NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={"/change-password"}>
+          <span>
+            {" "}
+            <Backups />
+          </span>
+          Backups
         </NavLink>
 
-        <NavLink className={({ isActive }) => (isActive ? styles.activeLink : "")} to={""}  style={{marginBlockStart:'18rem'}}>
+        <NavLink className={({ isActive }) => (isActive ? 'sidebarNav a.activeLink bg-teal-100 text-teal-900 font-bold' : "")} to={""}  style={{marginBlockStart:'18rem'}}>
           <span>
             {" "}
             <BackToDashBoard />
