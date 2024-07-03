@@ -18,7 +18,7 @@ const AddContent = () => {
   });
   
    const CreateUserRoleCall = async (payload: any) => {
-    const url ='/Category';
+    const url ='/api/users/';
     return await request.post(url,payload);
   };
   
