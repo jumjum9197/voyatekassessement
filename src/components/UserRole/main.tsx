@@ -1,62 +1,57 @@
-import PageLayout from "../pageLayout/main";
+import React, { useState, useEffect } from "react";
+import { Table, Button as AntButton, Modal } from "antd";
 import { ReactComponent as Seperator } from "../../assets/Seperator.svg";
 import { ReactComponent as Pics } from "../../assets/Frame 1.svg";
 import { ReactComponent as Filter } from "../../assets/greys.svg";
 import Button from "../../custom/button/button";
 import { ReactComponent as Add } from "../../assets/Vector.svg";
-import {  Table, Button as AntButton, MenuProps, Modal } from "antd";
-import { useState } from "react";
 import SearchInput from "../../custom/searchInput/searchInput";
 import EditContent from "./edit";
 import AddContent from "./add";
 import DeleteContent from "./delete";
+import { readData } from "../../request/request";
+import PageLayout from "../pageLayout/main";
 
 const Main = () => {
-
-    const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [data, setData] = useState([]);
 
-  
-  const data = Array.from({ length: 2 }, (_, index) => ({
-    id: `1234${index}`,
-    name: "About Us",
-    EmailAddress: "Description",
-    Role: "blah",
-  }));
+  // Fetch data when component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseData = await readData(); // Assuming readData function is implemented correctly
+        setData(responseData); // Update state with fetched data
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <button style={{ border: "0rem" }} onClick={() => setOpenEdit(true)}>
-          Edit
-        </button>
-      ),
-    },
-  ];
+    fetchData();
+  }, []);
+
   const columns = [
     {
-      key: "name",
-      title: "name",
-      dataIndex: "name",
+      key: "FullName",
+      title: "Name",
+      dataIndex: "FullName",
     },
     {
-      key: "EmailAddress",
+      key: "Email",
       title: "Email Address",
-      dataIndex: "EmailAddress",
+      dataIndex: "Email",
     },
     {
       key: "Role",
       title: "Role",
       dataIndex: "Role",
     },
-
     {
       key: "action",
       title: "Action",
       render: () => (
-        // <Dropdown menu={{ items }} trigger={["click"]}>
         <span>
           <AntButton onClick={() => setOpenEdit(true)} type="text">
             Edit
@@ -65,12 +60,13 @@ const Main = () => {
             Remove
           </AntButton>
         </span>
-        // </Dropdown>
       ),
     },
   ];
+
   return (
     <main>
+      {/* Your existing PageLayout component */}
       <PageLayout
         paragraph="LGA Setup"
         firstText="Settings"
@@ -80,23 +76,25 @@ const Main = () => {
 
       <section className="card">
         <section className="w-full p-8 flex justify-between items-center bg-white">
-          
           <>
             <SearchInput />
             <Filter />
-            <Button onClick={()=>{setShowAddModal(true)}} iconBefore={<Add />} text="New User" className="  p-2" />
+            <Button
+              onClick={() => setShowAddModal(true)}
+              iconBefore={<Add />}
+              text="New User"
+              className="p-2"
+            />
           </>
-
-     
         </section>
         <Table
           dataSource={data}
           columns={columns}
           pagination={{ position: ["bottomCenter"] }}
-          //rowKey={(record, index) => `${record.id}${index}`}
         />
       </section>
 
+      {/* Modals for Edit, Add, and Delete */}
       <Modal
         open={openEdit}
         onCancel={() => setOpenEdit(false)}
@@ -108,7 +106,6 @@ const Main = () => {
           </div>
         }
         footer={false}
-
       >
         <EditContent />
       </Modal>
@@ -130,16 +127,13 @@ const Main = () => {
         open={openDelete}
         centered
         onCancel={() => setOpenDelete(false)}
-
-        title={
-          'Delete this user'
-        }
+        title={"Delete this user"}
         footer={false}
       >
-       <DeleteContent/>
-
+        <DeleteContent />
       </Modal>
     </main>
   );
 };
+
 export default Main;
