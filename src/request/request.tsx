@@ -1,54 +1,43 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 
-export const request: AxiosInstance = axios.create({
-	baseURL: process.env.REACT_APP_BASE_URL,
-	env: {
-		// The FormData class to be used to automatically serialize the payload into a FormData object
-		FormData: globalThis?.FormData,
-	},
-});
+const API_URL = 'https://beeceptor.com/crud-api/';
 
-// Set up axios request interceptors
-request.interceptors.request.use(
-	function (config) {
-		let token = "";
-		if (typeof (config?.headers as any).authorization === "undefined") {
-			const tokenModel = JSON.parse(
-				localStorage.getItem("token-name") || "{}"
-			);
+export const createData = async (data:any) => {
+  try {
+    const response = await axios.post(API_URL, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating data', error);
+    throw error;
+  }
+};
 
-			if (tokenModel?.Token) {
-				token = tokenModel?.Token;
-			}
-		}
-		config.headers = {
-			Authorization: `Bearer ${token}`,
-			'Content-Type': 'application/json',
-			...config.headers,
-		} as any;
+export const readData = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    console.error('Error reading data', error);
+    throw error;
+  }
+};
 
-		return config;
-	},
-	function (error: any) {
-		if (getOnlineStatus() === 'offline') {
-			error = { message: 'You are currently offline. Kindly turn on your network or try again' };
-			return Promise.reject(error);
-		}
-	}
-);
+export const updateData = async (id:any, data:any) => {
+  try {
+    const response = await axios.put(`${API_URL}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating data', error);
+    throw error;
+  }
+};
 
-request.interceptors.response.use(null, function (error) {
-	if (error?.response?.status === 401 || error?.response?.status === 403) {
-	}
-
-	return Promise.reject(error);
-});
-
-function getOnlineStatus() {
-	return navigator.onLine ? 'online' : 'offline';
-}
-
-window.addEventListener('offline', getOnlineStatus);
-window.addEventListener('online', getOnlineStatus);
-
-export default request;
+export const deleteData = async (id:any) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting data', error);
+    throw error;
+  }
+};

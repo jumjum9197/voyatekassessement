@@ -129,6 +129,8 @@ const Main = () => {
       <Modal
         open={openDelete}
         centered
+        onCancel={() => setOpenDelete(false)}
+
         title={
           'Delete this user'
         }
