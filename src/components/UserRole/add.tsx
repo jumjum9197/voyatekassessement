@@ -10,10 +10,31 @@ const AddContent = () => {
   const validationRules = Yup.object().shape({
     Email: Yup.string().email("Invalid email").required("Email is required"),
     FullName: Yup.string().required("Full Name is required"),
-    Role: Yup.string().required("Role is required"),
+    // Role: Yup.string().required("Role is required"),
     password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
   });
 
+
+  const RoleOptions = [
+    {
+      name: "Admin",
+      value: "Admin",
+    },
+    {
+      name: "Lecturer",
+      value: "Lecturer",
+    },
+
+  ];
+
+  const RoleData: any =
+  RoleOptions &&
+  RoleOptions?.length > 0 &&
+  RoleOptions?.map((item: any, index: number) => (
+      <option value={item?.value} key={index}>
+        {item?.name}
+      </option>
+    ));
   const formik = useFormik<FormikValues>({
     initialValues: {
       Email: "",
@@ -57,6 +78,7 @@ const AddContent = () => {
             name="Role"
             placeholder="Select Role"
             label="Role"
+            options={RoleData}
           />
           
           <Field

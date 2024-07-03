@@ -10,6 +10,28 @@ import { updateData } from "../../request/request"; // Adjust import based on yo
 const EditContent = () => {
   const queryClient = useQueryClient();
 
+  
+  const RoleOptions = [
+    {
+      name: "Admin",
+      value: "Admin",
+    },
+    {
+      name: "Lecturer",
+      value: "Lecturer",
+    },
+
+  ];
+
+  const RoleData: any =
+  RoleOptions &&
+  RoleOptions?.length > 0 &&
+  RoleOptions?.map((item: any, index: number) => (
+      <option value={item?.value} key={index}>
+        {item?.name}
+      </option>
+    ));
+
   const validationRules = Yup.object().shape({
     Email: Yup.string().email("Invalid email").required("Email is required"),
     FullName: Yup.string().required("Full Name is required"),
@@ -17,6 +39,7 @@ const EditContent = () => {
     password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
   });
   
+
   const updateUserRoleCall = async (payload: any) => {
     const url = '/api/users/:id'; // Adjust URL according to your API endpoint
     return await updateData(url, payload); // Use your updateData function
@@ -78,6 +101,7 @@ const EditContent = () => {
             name="Role"
             placeholder="Select Role"
             label="Role"
+            options={RoleData}
           />
 
           <Field
