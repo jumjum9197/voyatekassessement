@@ -9,11 +9,13 @@ import { useState } from "react";
 import SearchInput from "../../custom/searchInput/searchInput";
 import EditContent from "./edit";
 import AddContent from "./add";
+import DeleteContent from "./delete";
 
 const Main = () => {
 
     const [showAddModal, setShowAddModal] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   
   const data = Array.from({ length: 2 }, (_, index) => ({
@@ -59,7 +61,7 @@ const Main = () => {
           <AntButton onClick={() => setOpenEdit(true)} type="text">
             Edit
           </AntButton>
-          <AntButton onClick={() => setOpenEdit(true)} type="text">
+          <AntButton onClick={() => setOpenDelete(true)} type="text">
             Remove
           </AntButton>
         </span>
@@ -105,13 +107,8 @@ const Main = () => {
             <p>Edit User</p>
           </div>
         }
-        footer={() => (
-          <Button
-            onClick={() => setOpenEdit(false)}
-            variant="text"
-            text="Add User"
-          />
-        )}
+        footer={false}
+
       >
         <EditContent />
       </Modal>
@@ -125,15 +122,20 @@ const Main = () => {
             <p>Add User</p>
           </div>
         }
-        footer={() => (
-          <Button
-            onClick={() => setShowAddModal(false)}
-            variant="text"
-            text="Add User"
-          />
-        )}
+        footer={false}
       >
         <AddContent />
+      </Modal>
+      <Modal
+        open={openDelete}
+        centered
+        title={
+          'Delete this user'
+        }
+        footer={false}
+      >
+       <DeleteContent/>
+
       </Modal>
     </main>
   );

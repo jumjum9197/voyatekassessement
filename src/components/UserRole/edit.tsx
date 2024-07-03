@@ -42,7 +42,7 @@ const EditContent = () => {
           <Select name="Role" placeholder="Select Role" label="Role" />
 
           <div className="flex justify-center mt-4">
-            <Button text="Save" className="w-full mt-4 py-4" />
+            <Button text="Update User" className="w-full mt-4 py-4" />
           </div>
         </form>
       </FormikProvider>

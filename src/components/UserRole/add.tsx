@@ -8,17 +8,6 @@ import Button from "../../custom/button/button";
 import Select from "../../custom/select/select";
 
 const AddContent = () => {
-  const { notification } = App.useApp();
-  const navigate = useNavigate();
-  const [materials, setMaterials] = useState<File | null>(null);
-
-  const handleMaterialsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
-    if (file) {
-      setMaterials(file[0]);
-      formik.setFieldValue("materials", file[0]);
-    }
-  };
 
   const formik = useFormik<FormikValues>({
     initialValues: {
