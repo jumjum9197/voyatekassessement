@@ -1,29 +1,21 @@
 import PageLayout from "../pageLayout/main";
 import { ReactComponent as Seperator } from "../../assets/Seperator.svg";
-import { ReactComponent as Search } from "../../assets/magnifier.svg";
 import { ReactComponent as Pics } from "../../assets/Frame 1.svg";
 import { ReactComponent as Filter } from "../../assets/greys.svg";
-
 import Button from "../../custom/button/button";
 import { ReactComponent as Add } from "../../assets/Vector.svg";
-import { Dropdown, Table, Button as AntButton, MenuProps, Modal } from "antd";
+import {  Table, Button as AntButton, MenuProps, Modal } from "antd";
 import { useState } from "react";
 import SearchInput from "../../custom/searchInput/searchInput";
-import { Form, Formik } from "formik";
 import EditContent from "./edit";
 import AddContent from "./add";
 
 const Main = () => {
-  //   const [showSearch, setShowSearch] = useState(false);
-  //   const [searchTerm, setSearchTerm] = useState("");
-  //   const [showAllFilter, setShowAllFilter] = useState(false);
+
     const [showAddModal, setShowAddModal] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
 
-  //   const handleSearch = (e: any) => {
-  //     setSearchTerm(e.target.value);
-  //   };
-
+  
   const data = Array.from({ length: 2 }, (_, index) => ({
     id: `1234${index}`,
     name: "About Us",

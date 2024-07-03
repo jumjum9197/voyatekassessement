@@ -1,24 +1,12 @@
 import React from "react";
 import { Field, FormikProvider, FormikValues, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { App } from "antd";
 import Input from "../../custom/input/input";
 import Button from "../../custom/button/button";
 import Select from "../../custom/select/select";
 
 const EditContent = () => {
-  const { notification } = App.useApp();
   const navigate = useNavigate();
-  const [materials, setMaterials] = useState<File | null>(null);
-
-  const handleMaterialsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
-    if (file) {
-      setMaterials(file[0]);
-      formik.setFieldValue("materials", file[0]);
-    }
-  };
 
   const formik = useFormik<FormikValues>({
     initialValues: {
@@ -32,7 +20,10 @@ const EditContent = () => {
   return (
     <main className="p-4">
       <FormikProvider value={formik}>
-        <form className="w-full max-w-md mx-auto" onSubmit={formik.handleSubmit}>
+        <form
+          className="w-full max-w-md mx-auto"
+          onSubmit={formik.handleSubmit}
+        >
           <Field
             as={Input}
             name="Email"
@@ -48,11 +39,7 @@ const EditContent = () => {
             label="Full Name"
           />
 
-          <Select
-            name="Role"
-            placeholder="Select Role"
-            label="Role"
-          />
+          <Select name="Role" placeholder="Select Role" label="Role" />
 
           <div className="flex justify-center mt-4">
             <Button text="Save" className="w-full mt-4 py-4" />
