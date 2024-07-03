@@ -4,6 +4,7 @@ import Input from "../../custom/input/input";
 import Button from "../../custom/button/button";
 import Select from "../../custom/select/select";
 import { createData } from "../../request/request";
+import { notification } from "antd";
 
 const EditContent = () => {
   const validationRules = Yup.object().shape({
@@ -44,6 +45,10 @@ const EditContent = () => {
     onSubmit: async (data, { resetForm }) => {
       try {
         const response = await createData(data); // Create data using the API
+        notification.success({
+            message: "Success",
+            description: data.Message,
+          });
         console.log('Data created successfully', response);
         resetForm();
       } catch (error) {

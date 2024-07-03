@@ -3,6 +3,7 @@ import { Field, FormikProvider, FormikValues, useFormik } from "formik";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 
 import Button from "../../custom/button/button";
+import { notification } from "antd";
 
 const DeleteContent = () => {
   const formik = useFormik<FormikValues>({
@@ -19,6 +20,9 @@ const DeleteContent = () => {
       // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Actual delete logic would go here
+      notification.success({
+        message: "Success",
+      });
       console.log("Deleting...");
       // Reset form after delete
       formik.resetForm();
