@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClientProvider,QueryClient } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { App as AntdApp } from "antd";
+import { Theme } from "./theme/theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,11 +26,11 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {/* <Theme> */}
+        <Theme>
           <AntdApp notification={{ placement: "topRight" }}>
             <App />
           </AntdApp>
-        {/* </Theme> */}
+        </Theme>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>

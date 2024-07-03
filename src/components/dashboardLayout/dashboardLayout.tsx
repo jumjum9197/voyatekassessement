@@ -3,8 +3,7 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 import { Drawer } from "antd";
 import { useState } from "react";
-import '../../../src/styles/tailwind.css'; 
-
+import "../../../src/styles/tailwind.css";
 
 const DashboardLayout = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -13,28 +12,26 @@ const DashboardLayout = () => {
   const handleClose = () => setOpenSidebar(false);
 
   return (
-    <main className="container flex flex-row h-full w-full bg-gray-100">
+    <main>
       <Header handleOpenSidebar={handleOpen} />
-      <section style={{ display: "flex", width:'100%' }}>
-       
-          <section className='sidebar h-full whitespace-nowrap bg-gray-200 border-r border-gray-300 sm:hidden sm:w-7/12 sm:whitespace-normal'>
+      <div className="flex flex-col h-screen">
+        <section className="flex flex-1">
+          <section className="h-full bg-gray-10 border-r border-gray-300 sm:ml-4 sm:block hidden">
             <Sidebar />
           </section>
-          <Drawer placement={"left"} onClose={handleClose} open={openSidebar}  >
+          {/* Conditionally render Drawer only on small screens */}
+          <Drawer placement="left" onClose={handleClose} visible={openSidebar} className="sm:hidden">
             <Sidebar />
           </Drawer>
-       
-
-        <section className='mainContent flex flex-col w-full bg-gray-200 p-16 overflow-hidden sm:pl-0 sm:p-0'>
-          <div className='children flex flex-col w-full p-16 bg-white rounded-lg shadow-md sm:pl-4 sm:pr-4 lg:pl-60'>
-            <Outlet />
-          </div>
+          <section className="flex flex-col w-full  bg-gray-10 overflow-hidden sm:ml-0 flex-1">
+            <div className="flex flex-col w-full  rounded-lg  sm:pl-4 sm:pr-4  flex-1">
+              <Outlet />
+            </div>
+          </section>
         </section>
-      </section>
+      </div>
     </main>
   );
 };
 
 export default DashboardLayout;
-
-
